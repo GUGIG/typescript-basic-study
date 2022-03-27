@@ -1,0 +1,45 @@
+To automatically compile a ts file when save:
+>> tsc <filename> --watch
+
+Initialize typescript config file (tsconfig.json)
+>> tsc --init
+  * With the tsconfig file, you can run the command below to compile ts files.
+  >> tsc
+  * The default setting prevents compliation of ts files in "node_modules" directory.
+
+
+In tsconfig.json file, you can specify
+1. "exclude" property: tsfile(s)/directory(s) you don't want to compile
+2. "include" property: tsfile(s)/directory(s) you only want to compile
+The target ts files would be in "include" - "exclude" subset.
+
+If "lib" property is not specified, default api's will be included (ex: dom api)
+But when specified, you should write stuffs you'd need.
+Check typescript documents for more details about these apis, features & more.
+
+"sourceMap" property is super convenient when you want to
+see the typescript source from the devtools in modern browsers.
+It lets you see the original ts file in Source tap in devtool
+via generating "~.js.map" files in your project,
+which act as a bridge between typescript source file & devtool.
+It even shows break points in typescript source file!
+
+With "outDir" property, you can set a direcory of output js files.
+If you set "outDir" as "./dist", all compiled js files will be saved/updated
+in that "./dist" directory.
+
+The property "rootDir" doesn't really live up to it's name
+because when you set the root directory via the property, the compiler not only looks
+into the root directory you've set but also outside of the directory.
+"rootDir" only works as a specified name of a directory 
+that the compiler would look into and make an output with the same directory structure.
+It would make a lot more sense if the property name was something like "relativePathBaseDir".
+
+If "noEmit" is set to true, compiler won't generate output.
+The usecase may be when you only want to compile and check errors?
+
+The "noEmitOnError" looks just like the property you'd want to use in
+cases I described above.
+
+"downlevelIteration" is there to solve any niche case that happens
+when your output is old js version and forloops are not working properly.
